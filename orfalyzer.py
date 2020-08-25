@@ -47,10 +47,10 @@ class CommandLine():
     def __init__(self, inOpts=None) :
         '''Implement a parser to read command line argv string using argparse'''
         self.parser = argparse.ArgumentParser(
-            description='Orf-A-Lyzer.py -- Find ORFs in prokaryotic DNA/RNA sequence and output protein properties',
+            description='orfalyzer.py -- Find ORFs in prokaryotic DNA/RNA sequence and output protein properties',
             epilog='',
             add_help=True, prefix_chars='-',
-            usage='%(prog)s [options] -option1[default] <input >output')
+            usage='%(prog)s [options] input.fna output.txt')
         self.parser.add_argument('inFile',
                                  action='store',
                                  help='input FASTA file name')
