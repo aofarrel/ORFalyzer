@@ -2,11 +2,15 @@ version 1.0
 
 task orf {
 	input {
+		File script
 		File inFile
 		File outFile
 	}
 
 	command {
+		echo > orfalyzer.py
+		ls
+		cat orfalyzer.py
 		./orfalyzer.py ~{inFile} ~{outFile}
 	}
 
@@ -27,10 +31,12 @@ task orf {
 
 workflow orfalyzer {
 	input {
+		File script
 		File inFile
 		File outFile
 	}
-	call orf { input: inFile = inFile,
+	call orf { input: script = script,
+		inFile = inFile,
 		outFile = outFile
 	}
 }
