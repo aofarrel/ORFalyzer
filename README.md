@@ -6,7 +6,7 @@ Authors of the original 2018 code: Ash O'Farrell, [Blaise Nasari](https://www.li
 # Disclaimer and License
 This is a program I wrote as an undergraduate in an introductory course. I am using it as a test program for other systems rather than for actual research. While prokaryotes tend not to undergo mRNA processing (hence why the scope is limited to prokaryotes), **I don't make any claims about the scientific veracity of this program.** With that being said, please feel free to tear it to pieces or build upon it as you see fit.
 
-I know that writing programs about open reading frames is the sort of thing that be/become a common programming assignment, so if you are a student, please don't copy this code for your programming homework. Not only does it have some issues, but developing an algorithm and banging your fists on the desk as you Google a syntax error are essential computer science skills.
+I know that writing programs about open reading frames is the sort of thing that is/may become a common programming assignment, so if you are a student, please don't copy this code for your programming homework. Not only does it have some issues, but developing an algorithm and banging your fists on the desk as you Google a syntax error are essential computer science skills.
 
 Anyway, until I have my tea and remember the difference between GPLv2 and GPLv3 and GPL (NYSE), I'm just gonna say "attribution" and "share-alike" as I wave my hand.
 
