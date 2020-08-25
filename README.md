@@ -74,9 +74,9 @@ MPKRTDIKSILILGAGPIVIGQACEFDYSGAQACKALREEGYRVILVNSNPATIMTDPEMADATYIEPIHWEVVRKIIEK
 Gives the properties of the resulting protein. pI (isoelectric point), molar extinction coefficient, mass extinction coefficient, molecular weight, and a percentage breakdown of amino acid composition to the hundredths place.
 
 Example:  
-┏━━━━━━━━━━━━┓  
-┃  Protein properties   ┃  
-┡━━━━━━━━━━━━┩  
+┏━━━━━━━━━┓  
+┃Protein properties┃  
+┡━━━━━━━━━┩  
 pI value: 5.044833794385195  
 Molar Extinction: 69940  
 Mass Extinction: 0.5935128099437988  
