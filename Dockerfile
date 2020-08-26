@@ -1,11 +1,18 @@
-FROM python:3.8
+FROM ubuntu:18.04
 
-WORKDIR /code
+COPY orfalyzer.py orfalyzer.py
+COPY sequenceanalysis.py sequenceanalysis.py
+COPY mini_e_coli.fna mini_e_coli.fna
+COPY out.txt out.txt
 
-COPY orfalyzer.py .
-COPY sequenceanalysis.py .
+RUN apt-get update \
+  && apt-get install -y python3-pip python3-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 install --upgrade pip
 
-# To force a chmod in the WDL. What could possibly go wrong?
-RUN apt-get update && apt-get -y install sudo
+RUN ls -l
 
-CMD [ "python", "./orfalyzer.py" ]
+ENV LANG C.UTF-8
+
+CMD [ "python3", "orfalyzer.py", "mini_e_coli.fna", "out.txt" ]

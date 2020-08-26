@@ -8,9 +8,7 @@ task orf {
 	}
 
 	command {
-		echo > orfalyzer.py
-		ls
-		sudo chmod 777
+		ls -l
 		cat orfalyzer.py
 		./orfalyzer.py ~{inFile} ~{outFile}
 	}
