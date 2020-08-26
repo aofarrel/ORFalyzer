@@ -1,9 +1,11 @@
-FROM python:3
+FROM python:3.8
 
-MAINTAINER Ash OFarrell <aofarrel@ucsc.edu>
+WORKDIR /code
 
-USER root
-ADD ./orfalyzer.py .
-ADD ./sequenceanalysis.py .
+COPY orfalyzer.py .
+COPY sequenceanalysis.py .
 
-CMD python3 ./orfalyzer.py
+# To force a chmod in the WDL. What could possibly go wrong?
+RUN apt-get update && apt-get -y install sudo
+
+CMD [ "python", "./orfalyzer.py" ]

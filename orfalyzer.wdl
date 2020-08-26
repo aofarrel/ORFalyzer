@@ -10,6 +10,7 @@ task orf {
 	command {
 		echo > orfalyzer.py
 		ls
+		sudo chmod 777
 		cat orfalyzer.py
 		./orfalyzer.py ~{inFile} ~{outFile}
 	}
