@@ -2,6 +2,8 @@
 .DS_Store
 *.pyc
 out.txt
+outfile.txt
 Cromwell.stderr.txt
 Cromwell.stdout.txt
 .dockerenv
+inputs-local.json
