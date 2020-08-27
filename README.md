@@ -1,24 +1,30 @@
 # ORFalyzer
 [![Python 3.6](https://img.shields.io/badge/python-3.6-green.svg)](https://www.python.org/downloads/release/python-360/)
 [![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)](https://www.python.org/downloads/release/python-380/)
+[![WDL 1.0](https://img.shields.io/badge/WDL-1.0-lightgrey.svg)](https://github.com/openwdl/wdl/blob/main/versions/1.0/SPEC.md)
+[![Docker build automated](https://img.shields.io/badge/docker%20build-automated-blue.svg)](https://quay.io/repository/aofarrel/orfalyzer)
 
 Find ORFs in prokaryotic DNA/RNA sequence and output protein properties -- the ORF itself, location, length in nucleotides, resulting amino acid chain, and the pI, molar and mass extinction, molecular weight, and amino acid composition as a percentage of said amino acid chain. Python3 only.
 
-Authors of the original 2018 code: Ash O'Farrell, [Blaise Nasari](https://www.linkedin.com/in/blaise-nasri-411654139/). As of now I'm the sole maintainer because Blaise changed fields, but with that being said, Blaise definitely has my recommendation as being great to work with.
+A WDLized version is also available. You can try to run the Docker container on its own without WDL, but it'll fail because the inputs are only specified when using WDL. Don't worry, we'll fix it in prod.
  
 # Disclaimer and License
-This is a program I wrote as an undergraduate in an introductory course. I am using it as a test program for other systems rather than for actual research. While prokaryotes tend not to undergo mRNA processing (hence why the scope is limited to prokaryotes), **I don't make any claims about the scientific veracity of this program.** With that being said, please feel free to tear it to pieces or build upon it as you see fit.
+This is a program I wrote as an undergraduate in an introductory course, with some contributions by [Blaise Nasari](https://www.linkedin.com/in/blaise-nasri-411654139/). Blaise has since changed fields and I do not have contact with him but as I wrote most of the code and I doubt he'd mind I am making a good-faith decision to use it as an open-source test program for other systems, such as [Dockstore](https://dockstore.org/). As for actual research usage of this program: While prokaryotes tend not to undergo mRNA processing, **I don't make any claims about the scientific veracity of this program.** With that being said, please feel free to tear it to pieces or build upon it as you see fit.
 
 I know that writing programs about open reading frames is the sort of thing that is/may become a common programming assignment, so if you are a student, please don't copy this code for your programming homework. Not only does it have some issues, but developing an algorithm and banging your fists on the desk as you Google a syntax error are essential computer science skills.
 
 Anyway, until I have my tea and remember the difference between GPLv2 and GPLv3 and GPL (NYSE), I'm just gonna say "attribution" and "share-alike" as I wave my hand.
 
-# Usage
+# Usage -- Python
 `python3 [optional arguments] inFile outFile `
 such as:
 `python3 -mg 200 mini_e_coli.fna output.txt`
 
-## Optional Arguments
+# Usage -- WDL
+`dockstore workflow launch --local-entry orfalyzer.wdl --json [your JSON file here]`
+See inputs-remote.json in this repo for a functional example of a JSON input file.
+
+## Optional Arguments (currently only implemented in the non-WDL version)
 '-mG', '--minGene',
    * Minimum gene length, in nucleotides, to be reported. If you set -1, all ORFs, even little babies like ATGAAATAG, will be reported.
    * type=int
