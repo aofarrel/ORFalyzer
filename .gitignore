@@ -7,3 +7,5 @@ Cromwell.stderr.txt
 Cromwell.stdout.txt
 .dockerenv
 inputs-local.json
+blank.txt
+cromwell-input/*
