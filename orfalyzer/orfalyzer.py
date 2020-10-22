@@ -103,7 +103,7 @@ def main(inCL=None):
                                 myCommandLine.args.start,
                                 myCommandLine.args.stop,
                                 myCommandLine.args.cytosine)
-    readInFile = sequenceanalysis.FastAreader(myCommandLine.args.inFile)
+    readInFile = sequenceanalysis.FastaReader(myCommandLine.args.inFile)
     for head, seq in readInFile.readFasta():
         thisOrfFinder._processHeader_(head, readInFile.headerNumber)
         thisOrfFinder._addsequence_(seq)
