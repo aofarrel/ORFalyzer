@@ -122,8 +122,8 @@ class OrfFinder:
             '''
             Turns to True the first time we get a start codon, in order
             to prevent something like this from being reported as two ORFs:
-               ATG AAA AAA TAA AAA TAA
-               srt                   stp          stp
+               ATG NNN NNN TAA NNN TAA
+               srt         stp     stp
             This should be reset every frame.
             '''
 
@@ -203,8 +203,8 @@ class OrfFinder:
             '''
             Turns to True the first time we get a start codon, in order
             to prevent something like this from being reported as two ORFs:
-               ATG AAA AAA TAA AAA TAA
-               srt                   stp          stp
+               ATG NNN NNN TAA NNN TAA
+               srt         stp     stp
             This should be reset every frame.
             '''
 

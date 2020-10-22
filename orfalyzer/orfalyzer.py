@@ -19,9 +19,9 @@ composition and break down, pI, pH, molar extinction
 coefficient, mass extinction coefficient, & molecular weight.
 
 Abbreviations: 
-PP    = ProteinParams
+PP   = ProteinParams
 NP   = NucParams
-ORF = ORF Finder
+ORF  = ORF Finder
 
 '''
 
