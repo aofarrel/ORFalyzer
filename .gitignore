@@ -9,3 +9,4 @@ Cromwell.stdout.txt
 inputs-local.json
 cromwell-input/*
 blank.txt
+venvORF
