@@ -54,46 +54,58 @@ def test_fasta_emptyHeader():
 ############################################
 # test weird reading frames                #
 ############################################
-
-settings = [-1,True,"blank.txt",['ATG'],['TAG', 'TGA', 'TAA'],True]
+global testID
+testID = 0
+settings = [-1,True,"temp%d.txt" % testID,['ATG'],['TAG', 'TGA', 'TAA'],True]
 
 def setupLyzerObject(orfToTest, header):
 	lyzer = orfalyzer.sequenceanalysis.OrfFinder()
+	global testID
 	lyzer._processArgs_(*settings)
 	lyzer._processHeader_(header, 0)
 	lyzer._addsequence_(orfToTest)
+	testID += testID
 	return lyzer
 
-#no ORF
-def test_orf_noORF():
-	noORF = "TAATCTTTTAAAGGGCCCTTTTAAAATC"
-	noLyzer = setupLyzerObject(noORF, "noORF")
-	with open('blank.txt', 'r') as f: lines = f.readlines()
-	assert (lines==["> noORF\n"])
-	os.remove('blank.txt')
+#no ATG -- should still be considered an ORF as the ATG may have come earlier
+def test_orf_noATG():
+	noATG = "TAATCTTTTAAAGGGCCCTTTTAAAATC"
+	noATGLyzer = setupLyzerObject(noATG, "noATG")
+	global testID
+	with open('temp%d.txt' % testID, 'r') as f: test = f.readlines()
+	with open('testTruthFiles/test%d.txt' % testID, 'r') as g: truth = g.readlines()
+	assert (test==truth)
+	os.remove('temp%d.txt' % testID)
+	testID += 1
 
 #short ORF
-def test_orf_shortORF():
-	shortORF = ">shortORF\nATGTAA"
-	shortLyzer = setupLyzerObject(shortORF, "shortORF")
-	with open('blank.txt', 'r') as f: lines = f.readlines()
-	#assert (lines==[">shortORF\n","ATGTAA"])
-	print(f.readlines())
-	os.remove('blank.txt')
+# def test_orf_shortORF():
+# 	shortORF = "ATGTAA"
+# 	shortLyzer = setupLyzerObject(shortORF, "shortORF")
+# 	global testID
+# 	with open('temp%d.txt' % testID, 'r') as f: test = f.readlines()
+# 	with open('testTruthFiles/test%d.txt' % testID, 'r') as g: truth = g.readlines()
+# 	assert (test==truth)
+# 	os.remove('temp%d.txt' % testID)
+# 	testID += 1
 
-def test_orf_newlines():
-	newlines = ">newlines\nATGATGATGATG\nTAANNNNNNNNNNNNATG\nCCCGGGCCCGGGTAA"
-def test_orf_unknownORF():
-	unknownORF = ">unknownORF\nATGNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTAA"
+# # buncha newlines
+# def test_orf_newlines():
+# 	newlines = ">newlines\nATGATGATGATG\nTAANNNNNNNNNNNNATG\nCCCGGGCCCGGGTAA"
 
-#orfalyzer.main()
+# # ORF only contains unknown nucleotides
+# def test_orf_unknownORF():
+# 	unknownORF = ">unknownORF\nATGNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTAA"
+
+# #no ORF
+# def test_orf_noORF():
+# 	noORF = "NNNNNNNNNNNN"
+# 	noLyzer = setupLyzerObject(noORF, "noORF")
 
 
 ############################################
 # clean up                                 #
 ############################################
-test_orf_noORF()
-test_orf_shortORF()
 print("Done.")
 
 
