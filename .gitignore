@@ -10,3 +10,5 @@ inputs-local.json
 cromwell-input/*
 blank.txt
 venvORF
+.cache/v/cache/lastfailed
+blank.txt
