@@ -292,18 +292,20 @@ class OrfFinder:
                     print("┏━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
                     print("┃  Resulting AA  ┃", file=open(self.outputfile, 'a'))
                     print("┡━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    print("{}".format(NP.aaAsString()), file=open(self.outputfile, 'a'))
+                    if (NP.aaAsString() != '-'):
+                        print("{}".format(NP.aaAsString()), file=open(self.outputfile, 'a'))
+                    else:
+                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
                     print("┏━━━━━━━━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
                     print("┃  Protein properties   ┃", file=open(self.outputfile, 'a'))
                     print("┡━━━━━━━━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    print("pI value: %s" % PP.pI(), file=open(self.outputfile, 'a'))
-                    print("Molar Extinction: %s" % PP.molarExtinction(),
-                          file=open(self.outputfile, 'a'))
-                    print("Mass Extinction: %s" % PP.massExtinction(),
-                          file=open(self.outputfile, 'a'))
-                    print("Molecular Weight: %s" % PP.molecularWeight(),
-                          file=open(self.outputfile, 'a'))
-                    print("Amino acid composition:", file=open(self.outputfile, 'a'))
+                    if (NP.aaAsString() != '-'):
+                        print("pI value: %s" % PP.pI(), file=open(self.outputfile, 'a'))
+                        print("Molar Extinction: %s" % PP.molarExtinction(), file=open(self.outputfile, 'a'))
+                        print("Mass Extinction: %s" % PP.massExtinction(), file=open(self.outputfile, 'a'))
+                        print("Molecular Weight: %s" % PP.molecularWeight(), file=open(self.outputfile, 'a'))
+                    else:
+                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
                     myAAcomposition = PP.aaComposition()
                     keys = list(myAAcomposition.keys())
                     keys.sort()
@@ -313,6 +315,7 @@ class OrfFinder:
                     elif PP.aaCount() == 1:
                         pass
                     else:
+                        print ("Amino acid composition:", file=open(self.outputfile, 'a'))
                         for key in keys:
                             print("\t{} = {:.2%}".format(key, myAAcomposition[key] / PP.aaCount()),
                                   file=open(self.outputfile, 'a'))
@@ -331,15 +334,20 @@ class OrfFinder:
                     print("┏━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
                     print("┃  Resulting AA  ┃", file=open(self.outputfile, 'a'))
                     print("┡━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    print("{}".format(NP.aaAsString()), file=open(self.outputfile, 'a'))
+                    if (NP.aaAsString() != '-'):
+                        print("{}".format(NP.aaAsString()), file=open(self.outputfile, 'a'))
+                    else:
+                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
                     print("┏━━━━━━━━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
                     print("┃  Protein properties   ┃", file=open(self.outputfile, 'a'))
                     print("┡━━━━━━━━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    print("pI value: %s" % PP.pI(), file=open(self.outputfile, 'a'))
-                    print("Molar Extinction: %s" % PP.molarExtinction(), file=open(self.outputfile, 'a'))
-                    print("Mass Extinction: %s" % PP.massExtinction(), file=open(self.outputfile, 'a'))
-                    print("Molecular Weight: %s" % PP.molecularWeight(), file=open(self.outputfile, 'a'))
-                    print ("Amino acid composition:", file=open(self.outputfile, 'a'))
+                    if (NP.aaAsString() != '-'):
+                        print("pI value: %s" % PP.pI(), file=open(self.outputfile, 'a'))
+                        print("Molar Extinction: %s" % PP.molarExtinction(), file=open(self.outputfile, 'a'))
+                        print("Mass Extinction: %s" % PP.massExtinction(), file=open(self.outputfile, 'a'))
+                        print("Molecular Weight: %s" % PP.molecularWeight(), file=open(self.outputfile, 'a'))
+                    else:
+                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
                     myAAcomposition = PP.aaComposition()
                     keys = list(myAAcomposition.keys())
                     keys.sort()
@@ -349,6 +357,7 @@ class OrfFinder:
                     elif PP.aaCount() == 1:
                         pass
                     else:
+                        print ("Amino acid composition:", file=open(self.outputfile, 'a'))
                         for key in keys:
                             print("\t{} = {:.2%}".format(key, myAAcomposition[key]/PP.aaCount()), file=open(self.outputfile, 'a'))
                     print("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n", file=open(self.outputfile, 'a'))
