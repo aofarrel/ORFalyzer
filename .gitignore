@@ -8,3 +8,4 @@ Cromwell.stdout.txt
 .dockerenv
 inputs-local.json
 cromwell-input/*
+.cache/*

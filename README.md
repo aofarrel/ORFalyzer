@@ -3,6 +3,7 @@
 [![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)](https://www.python.org/downloads/release/python-380/)
 [![WDL 1.0](https://img.shields.io/badge/WDL-1.0-lightgrey.svg)](https://github.com/openwdl/wdl/blob/main/versions/1.0/SPEC.md)
 [![Docker build automated](https://img.shields.io/badge/docker%20build-automated-blue.svg)](https://quay.io/repository/aofarrel/orfalyzer)
+![Travis (.org)](https://img.shields.io/travis/aofarrel/ORFalyzer)
 
 Find ORFs in prokaryotic DNA/RNA sequence and output protein properties -- the ORF itself, location, length in nucleotides, resulting amino acid chain, and the pI, molar and mass extinction, molecular weight, and amino acid composition as a percentage of said amino acid chain. Python3 only.
 
