@@ -4,13 +4,13 @@
 '''sequenceanalysis.py -- Orf-A-Lyzer Edition
 
 This program consists of four classes:
-* FastAreader, used for parasing fasta files
+* FastaReader, used for parasing fasta files
 * NucParams, used to analyze DNA/RNA data
 * ProteinParams, used to analyze amino acid chains
 * OrfFinder, used to analyze open reading frames
 
 OrfFinder finds open reading frames (ORFs) in a DNA sequence that is
-being parsed by FastAreader. It scans all three possible reading frames
+being parsed by FastaReader. It scans all three possible reading frames
 per strand, and will search both the plus and minus strands.
 
 In this version of sequenceanalysis, the contents of the entire
@@ -30,12 +30,12 @@ Output: ORF location, ORF content, predicted protein parameters'''
 
 import sys
 
-class FastAreader:
+class FastaReader:
     ''' 
     Define objects to read FastA files.
 
     instantiation: 
-    thisReader = FastAreader ('testTiny.fa')
+    thisReader = FastaReader ('testTiny.fa')
     usage:
     for head, seq in thisReader.readFasta():
         print (head,seq)

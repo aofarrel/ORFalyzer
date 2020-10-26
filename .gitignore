@@ -8,3 +8,7 @@ Cromwell.stdout.txt
 .dockerenv
 inputs-local.json
 cromwell-input/*
+blank.txt
+venvORF
+.cache/v/cache/lastfailed
+blank.txt

@@ -26,8 +26,7 @@ ORF  = ORF Finder
 '''
 
 
-from sequenceanalysis import FastAreader as FastaReader
-from sequenceanalysis import OrfFinder as ORF
+from orfalyzer import sequenceanalysis
 import argparse
 
 
@@ -97,14 +96,14 @@ def main(inCL=None):
         myCommandLine = CommandLine()
     else :
         myCommandLine = CommandLine(inCL)
-    thisOrfFinder = ORF()
+    thisOrfFinder = sequenceanalysis.OrfFinder()
     thisOrfFinder._processArgs_(myCommandLine.args.minGene,
                                 True,
                                 myCommandLine.args.outFile,
                                 myCommandLine.args.start,
                                 myCommandLine.args.stop,
                                 myCommandLine.args.cytosine)
-    readInFile = FastaReader(myCommandLine.args.inFile)
+    readInFile = sequenceanalysis.FastaReader(myCommandLine.args.inFile)
     for head, seq in readInFile.readFasta():
         thisOrfFinder._processHeader_(head, readInFile.headerNumber)
         thisOrfFinder._addsequence_(seq)
