@@ -9,7 +9,6 @@ task orf {
 	}
 
 	command {
-		ls -l
 		python ~{script} ~{inFile} ~{outFile}
 	}
 
@@ -18,7 +17,7 @@ task orf {
 	}
 
 	runtime {
-        docker: "quay.io/aofarrel/orfalyzer:latest"
+        docker: "quay.io/aofarrel/orfalyzer:CICD"
     }
 
     meta {
