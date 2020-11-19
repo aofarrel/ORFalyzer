@@ -1,0 +1,46 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  python-tests:
+    executor: python/default
+    steps:
+      - checkout
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+          command: python3 -m pytest -v tests.py
+          name: Run python related tests
+  
+  build-docker-image: 
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build docker image
+          command: | 
+            docker build .
+            #docker push https://quay.io/repository/aofarrel/orfalyzer:circleci
+  
+  # likely not possible as you can't mount files without machine
+  #build-alternative: 
+    #docker: 
+        #- image: circleci/golang:1.15
+    #steps: 
+      #- checkout
+      #- setup_remote_docker: 
+          #version: 19.03.13
+      #- run: 
+          #command: | 
+            #docker build - < Dockerfile
+            #docker push https://quay.io/repository/aofarrel/orfalyzer:circleci
+  
+
+workflows: 
+  main: 
+    jobs: 
+      - python-tests
+      - build-docker-image
