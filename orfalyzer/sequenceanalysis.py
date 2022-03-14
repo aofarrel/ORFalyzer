@@ -48,7 +48,7 @@ class FastaReader:
 
     def doOpen(self):
         ''' Handle file opens, allowing STDIN.'''
-        if self.fname is '':
+        if self.fname == '':
             return sys.stdin
         else:
             return open(self.fname)
