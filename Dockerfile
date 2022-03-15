@@ -1,12 +1,10 @@
-FROM python:3.7.9-alpine3.12
+FROM python:3.9.10-slim
 
-COPY orfalyzer/orfalyzer.py .
-COPY orfalyzer/sequenceanalysis.py .
+COPY orfalyzer/orfalyzer.py ./orfalyzer/
+COPY orfalyzer/sequenceanalysis.py ./orfalyzer/
 COPY mini_e_coli.fna .
 
 # needed for the utf-8 output 
 ENV LANG C.UTF-8
 
-ENTRYPOINT [] # bizarre workaround for running alpine on WDL
-
-CMD [ "python3", "orfalyzer.py"]
+CMD [ "ls" ]

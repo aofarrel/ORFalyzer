@@ -48,7 +48,7 @@ class FastaReader:
 
     def doOpen(self):
         ''' Handle file opens, allowing STDIN.'''
-        if self.fname is '':
+        if self.fname == '':
             return sys.stdin
         else:
             return open(self.fname)
@@ -281,86 +281,87 @@ class OrfFinder:
         with open(self.outputfile, 'a'):
             for listy in self.bigResultsList:
                 if listy[4]:  # minus strand
-                    print("-{:d} {:>5d}...{:>5d} {:>5d}".format(listy[0], listy[1], listy[2], listy[3]), file=open(self.outputfile, 'a'))
-                    NP = NucParams(True)
-                    NP.addSequence(listy[5])
-                    PP = ProteinParam(NP.aaAsString(), self.cytosine)
-                    print("┏━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
-                    print("┃  ORF in frame  ┃", file=open(self.outputfile, 'a'))
-                    print("┡━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    print(listy[5], file=open(self.outputfile, 'a'))
-                    print("┏━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
-                    print("┃  Resulting AA  ┃", file=open(self.outputfile, 'a'))
-                    print("┡━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    if (NP.aaAsString() != '-'):
-                        print("{}".format(NP.aaAsString()), file=open(self.outputfile, 'a'))
-                    else:
-                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
-                    print("┏━━━━━━━━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
-                    print("┃  Protein properties   ┃", file=open(self.outputfile, 'a'))
-                    print("┡━━━━━━━━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    if (NP.aaAsString() != '-'):
-                        print("pI value: %s" % PP.pI(), file=open(self.outputfile, 'a'))
-                        print("Molar Extinction: %s" % PP.molarExtinction(), file=open(self.outputfile, 'a'))
-                        print("Mass Extinction: %s" % PP.massExtinction(), file=open(self.outputfile, 'a'))
-                        print("Molecular Weight: %s" % PP.molecularWeight(), file=open(self.outputfile, 'a'))
-                    else:
-                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
-                    myAAcomposition = PP.aaComposition()
-                    keys = list(myAAcomposition.keys())
-                    keys.sort()
-                    # handles the case where no AA are present
-                    if PP.aaCount() == 0:
-                        pass
-                    elif PP.aaCount() == 1:
-                        pass
-                    else:
-                        print ("Amino acid composition:", file=open(self.outputfile, 'a'))
-                        for key in keys:
-                            print("\t{} = {:.2%}".format(key, myAAcomposition[key] / PP.aaCount()),
-                                  file=open(self.outputfile, 'a'))
-                    print("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n",
-                          file=open(self.outputfile, 'a'))
+                    with open(self.outputfile, 'a') as out:
+                        out.write("-{:d} {:>5d}...{:>5d} {:>5d}".format(listy[0], listy[1], listy[2], listy[3]))
+                        NP = NucParams(True)
+                        NP.addSequence(listy[5])
+                        PP = ProteinParam(NP.aaAsString(), self.cytosine)
+                        out.write("┏━━━━━━━━━━━━━━━━┓")
+                        out.write("┃  ORF in frame  ┃")
+                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        out.write(listy[5])
+                        out.write("┏━━━━━━━━━━━━━━━━┓")
+                        out.write("┃  Resulting AA  ┃")
+                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        if (NP.aaAsString() != '-'):
+                            out.write("{}".format(NP.aaAsString()))
+                        else:
+                            out.write("None -- just a stop codon")
+                        out.write("┏━━━━━━━━━━━━━━━━━━━━━━━┓")
+                        out.write("┃  Protein properties   ┃")
+                        out.write("┡━━━━━━━━━━━━━━━━━━━━━━━┩")
+                        if (NP.aaAsString() != '-'):
+                            out.write("pI value: %s" % PP.pI())
+                            out.write("Molar Extinction: %s" % PP.molarExtinction())
+                            out.write("Mass Extinction: %s" % PP.massExtinction())
+                            out.write("Molecular Weight: %s" % PP.molecularWeight())
+                        else:
+                            out.write("None -- just a stop codon")
+                        myAAcomposition = PP.aaComposition()
+                        keys = list(myAAcomposition.keys())
+                        keys.sort()
+                        # handles the case where no AA are present
+                        if PP.aaCount() == 0:
+                            pass
+                        elif PP.aaCount() == 1:
+                            pass
+                        else:
+                            out.write("Amino acid composition:")
+                            for key in keys:
+                                out.write("\t{} = {:.2%}".format(key, myAAcomposition[key] / PP.aaCount()),
+                                    )
+                        out.write("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n",
+                            )
                 else:  # plus strand
                     NP = NucParams(True)
                     NP.addSequence(listy[5])
                     PP = ProteinParam(NP.aaAsString(), self.cytosine)
-
-                    print("{:+d} {:>5d}...{:>5d} {:>5d}".format(listy[0], listy[1], listy[2], listy[3]), file=open(self.outputfile, 'a'))
-                    print("┏━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
-                    print("┃  ORF in frame  ┃", file=open(self.outputfile, 'a'))
-                    print("┡━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    print(listy[5], file=open(self.outputfile, 'a'))
-                    print("┏━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
-                    print("┃  Resulting AA  ┃", file=open(self.outputfile, 'a'))
-                    print("┡━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    if (NP.aaAsString() != '-'):
-                        print("{}".format(NP.aaAsString()), file=open(self.outputfile, 'a'))
-                    else:
-                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
-                    print("┏━━━━━━━━━━━━━━━━━━━━━━━┓", file=open(self.outputfile, 'a'))
-                    print("┃  Protein properties   ┃", file=open(self.outputfile, 'a'))
-                    print("┡━━━━━━━━━━━━━━━━━━━━━━━┩", file=open(self.outputfile, 'a'))
-                    if (NP.aaAsString() != '-'):
-                        print("pI value: %s" % PP.pI(), file=open(self.outputfile, 'a'))
-                        print("Molar Extinction: %s" % PP.molarExtinction(), file=open(self.outputfile, 'a'))
-                        print("Mass Extinction: %s" % PP.massExtinction(), file=open(self.outputfile, 'a'))
-                        print("Molecular Weight: %s" % PP.molecularWeight(), file=open(self.outputfile, 'a'))
-                    else:
-                        print("None -- just a stop codon", file=open(self.outputfile, 'a'))
-                    myAAcomposition = PP.aaComposition()
-                    keys = list(myAAcomposition.keys())
-                    keys.sort()
-                    # handles the case where no AA are present
-                    if PP.aaCount() == 0:
-                        pass
-                    elif PP.aaCount() == 1:
-                        pass
-                    else:
-                        print ("Amino acid composition:", file=open(self.outputfile, 'a'))
-                        for key in keys:
-                            print("\t{} = {:.2%}".format(key, myAAcomposition[key]/PP.aaCount()), file=open(self.outputfile, 'a'))
-                    print("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n", file=open(self.outputfile, 'a'))
+                    with open(self.outputfile, 'a') as out:
+                        out.write("{:+d} {:>5d}...{:>5d} {:>5d}".format(listy[0], listy[1], listy[2], listy[3]))
+                        out.write("┏━━━━━━━━━━━━━━━━┓")
+                        out.write("┃  ORF in frame  ┃")
+                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        out.write(listy[5])
+                        out.write("┏━━━━━━━━━━━━━━━━┓")
+                        out.write("┃  Resulting AA  ┃")
+                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        if (NP.aaAsString() != '-'):
+                            out.write("{}".format(NP.aaAsString()))
+                        else:
+                            out.write("None -- just a stop codon")
+                        out.write("┏━━━━━━━━━━━━━━━━━━━━━━━┓")
+                        out.write("┃  Protein properties   ┃")
+                        out.write("┡━━━━━━━━━━━━━━━━━━━━━━━┩")
+                        if (NP.aaAsString() != '-'):
+                            out.write("pI value: %s" % PP.pI())
+                            out.write("Molar Extinction: %s" % PP.molarExtinction())
+                            out.write("Mass Extinction: %s" % PP.massExtinction())
+                            out.write("Molecular Weight: %s" % PP.molecularWeight())
+                        else:
+                            out.write("None -- just a stop codon")
+                        myAAcomposition = PP.aaComposition()
+                        keys = list(myAAcomposition.keys())
+                        keys.sort()
+                        # handles the case where no AA are present
+                        if PP.aaCount() == 0:
+                            pass
+                        elif PP.aaCount() == 1:
+                            pass
+                        else:
+                            out.write("Amino acid composition:")
+                            for key in keys:
+                                out.write("\t{} = {:.2%}".format(key, myAAcomposition[key]/PP.aaCount()))
+                        out.write("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n")
                     
 
     def writeResults(self, results):

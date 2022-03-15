@@ -12,14 +12,14 @@ A WDLized version is also available. You can try to run the Docker container on 
 # Disclaimer and License
 This is a program I wrote as an undergraduate in an introductory course, with some contributions by [Blaise Nasari](https://www.linkedin.com/in/blaise-nasri-411654139/). Blaise has since changed fields and I do not have contact with him but as I wrote most of the code and I doubt he'd mind I am making a good-faith decision to use it as an open-source test program for other systems, such as [Dockstore](https://dockstore.org/). As for actual research usage of this program: While prokaryotes tend not to undergo mRNA processing, **I don't make any claims about the scientific veracity of this program.** With that being said, please feel free to tear it to pieces or build upon it as you see fit.
 
-I know that writing programs about open reading frames is the sort of thing that is/may become a common programming assignment, so if you are a student, please don't copy this code for your programming homework. Not only does it have some issues, but developing an algorithm and banging your fists on the desk as you Google a syntax error are essential computer science skills.
+I know that writing programs about open reading frames is the sort of thing that is/may become a common programming assignment, **so if you are a student, please don't copy this code for your programming homework.** Not only does it have some issues, but developing an algorithm and banging your fists on the desk as you Google a syntax error are essential computer science skills.
 
 Anyway, until I have my tea and remember the difference between GPLv2 and GPLv3 and GPL (NYSE), I'm just gonna say "attribution" and "share-alike" as I wave my hand.
 
 # Usage -- Python
-`python3 [optional arguments] inFile outFile `
+`python3 orfalyzer/orfalzyer.py [optional arguments] inFile outFile `
 such as:
-`python3 -mg 200 mini_e_coli.fna output.txt`
+`python3 orfalyzer/orfalzyer.py -mg 200 mini_e_coli.fna output.txt`
 
 # Usage -- WDL
 `dockstore workflow launch --local-entry orfalyzer.wdl --json [your JSON file here]`

@@ -26,7 +26,7 @@ ORF  = ORF Finder
 '''
 
 
-from orfalyzer import sequenceanalysis
+import sequenceanalysis
 import argparse
 
 

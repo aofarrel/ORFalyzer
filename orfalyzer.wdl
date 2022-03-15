@@ -2,14 +2,13 @@ version 1.0
 
 task orf {
 	input {
-		File script
-		File otherscript
 		File inFile
-		File outFile
+		String outFile
 	}
 
 	command {
-		python ~{script} ~{inFile} ~{outFile}
+		touch ~{outFile}
+		python3 /orfalyzer/orfalyzer.py ~{inFile} ~{outFile}
 	}
 
 	output {
@@ -17,7 +16,7 @@ task orf {
 	}
 
 	runtime {
-        docker: "quay.io/aofarrel/orfalyzer:CICD"
+        docker: "quay.io/aofarrel/orfalyzer:python3.9.10slim"
     }
 
     meta {
@@ -29,14 +28,12 @@ task orf {
 
 workflow orfalyzer {
 	input {
-		File script
-		File otherscript
 		File inFile
-		File outFile
+		String outFile = "ORFs.txt"
 	}
-	call orf { input: script = script,
-		otherscript = otherscript,
-		inFile = inFile,
-		outFile = outFile
+	call orf {
+		input: 
+			inFile = inFile,
+			outFile = outFile
 	}
 }
