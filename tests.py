@@ -65,6 +65,8 @@ class TestWeirdReadingFrames(unittest.TestCase):
 		return lyzer
 
 	# this is currently failing and should be investigated
+	#
+	#
 	#no ATG -- should still be considered an ORF as the ATG may have come earlier
 	# def test_orf_noATG(self):
 	# 	noATG = "TAATCTTTTAAAGGGCCCTTTTAAAATC"
@@ -77,6 +79,9 @@ class TestWeirdReadingFrames(unittest.TestCase):
 	# 	os.remove('temp%d.txt' % testID)
 	# 	testID += 1
 
+	# these tests were never fully implemented as they have no truth files
+	#
+	#
 	#short ORF
 	# def test_orf_shortORF():
 	# 	shortORF = "ATGTAA"
