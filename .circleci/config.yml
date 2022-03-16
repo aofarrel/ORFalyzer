@@ -20,6 +20,10 @@ jobs:
     steps:
       - checkout
       - run:
+          command: |  # use pipenv to install dependencies
+            sudo pip install pipenv
+            pipenv install
+      - run:
           command: python3 -m pytest -v tests.py
           name: Run python related tests
 
