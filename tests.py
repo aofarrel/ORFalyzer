@@ -64,20 +64,16 @@ class TestWeirdReadingFrames(unittest.TestCase):
 		testID += testID
 		return lyzer
 
-	# this is currently failing and should be investigated
-	#
-	#
 	#no ATG -- should still be considered an ORF as the ATG may have come earlier
-	# def test_orf_noATG(self):
-	# 	noATG = "TAATCTTTTAAAGGGCCCTTTTAAAATC"
-	# 	noATGLyzer = self.setupLyzerObject(noATG, "noATG")
-	# 	global testID
-	# 	with open('temp%d.txt' % testID, 'r') as f: test = f.readlines()
-	# 	with open('testTruthFiles/test%d.txt' % testID, 'r') as g: truth = g.readlines()
-	# 	print(list(set(test) - set(truth)))
-	# 	assert (test==truth)
-	# 	os.remove('temp%d.txt' % testID)
-	# 	testID += 1
+	def test_orf_noATG(self):
+		noATG = "TAATCTTTTAAAGGGCCCTTTTAAAATC"
+		noATGLyzer = self.setupLyzerObject(noATG, "noATG")
+		global testID
+		with open('temp%d.txt' % testID, 'r') as f: test = f.readlines()
+		with open('testTruthFiles/test%d.txt' % testID, 'r') as g: truth = g.readlines()
+		assert (test==truth)
+		os.remove('temp%d.txt' % testID)
+		testID += 1
 
 	# these tests were never fully implemented as they have no truth files
 	#

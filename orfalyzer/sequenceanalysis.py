@@ -282,31 +282,32 @@ class OrfFinder:
             for listy in self.bigResultsList:
                 if listy[4]:  # minus strand
                     with open(self.outputfile, 'a') as out:
-                        out.write("-{:d} {:>5d}...{:>5d} {:>5d}".format(listy[0], listy[1], listy[2], listy[3]))
+                        out.write("-{:d} {:>5d}...{:>5d} {:>5d}\n".format(listy[0], listy[1], listy[2], listy[3]))
                         NP = NucParams(True)
                         NP.addSequence(listy[5])
                         PP = ProteinParam(NP.aaAsString(), self.cytosine)
-                        out.write("┏━━━━━━━━━━━━━━━━┓")
-                        out.write("┃  ORF in frame  ┃")
-                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        out.write("┏━━━━━━━━━━━━━━━━┓\n")
+                        out.write("┃  ORF in frame  ┃\n")
+                        out.write("┡━━━━━━━━━━━━━━━━┩\n")
                         out.write(listy[5])
-                        out.write("┏━━━━━━━━━━━━━━━━┓")
-                        out.write("┃  Resulting AA  ┃")
-                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        out.write("\n")
+                        out.write("┏━━━━━━━━━━━━━━━━┓\n")
+                        out.write("┃  Resulting AA  ┃\n")
+                        out.write("┡━━━━━━━━━━━━━━━━┩\n")
                         if (NP.aaAsString() != '-'):
-                            out.write("{}".format(NP.aaAsString()))
+                            out.write("{}\n".format(NP.aaAsString()))
                         else:
-                            out.write("None -- just a stop codon")
-                        out.write("┏━━━━━━━━━━━━━━━━━━━━━━━┓")
-                        out.write("┃  Protein properties   ┃")
-                        out.write("┡━━━━━━━━━━━━━━━━━━━━━━━┩")
+                            out.write("None -- just a stop codon\n")
+                        out.write("┏━━━━━━━━━━━━━━━━━━━━━━━┓\n")
+                        out.write("┃  Protein properties   ┃\n")
+                        out.write("┡━━━━━━━━━━━━━━━━━━━━━━━┩\n")
                         if (NP.aaAsString() != '-'):
-                            out.write("pI value: %s" % PP.pI())
-                            out.write("Molar Extinction: %s" % PP.molarExtinction())
-                            out.write("Mass Extinction: %s" % PP.massExtinction())
-                            out.write("Molecular Weight: %s" % PP.molecularWeight())
+                            out.write("pI value: %s\n" % PP.pI())
+                            out.write("Molar Extinction: %s\n" % PP.molarExtinction())
+                            out.write("Mass Extinction: %s\n" % PP.massExtinction())
+                            out.write("Molecular Weight: %s\n" % PP.molecularWeight())
                         else:
-                            out.write("None -- just a stop codon")
+                            out.write("None -- just a stop codon\n")
                         myAAcomposition = PP.aaComposition()
                         keys = list(myAAcomposition.keys())
                         keys.sort()
@@ -316,39 +317,39 @@ class OrfFinder:
                         elif PP.aaCount() == 1:
                             pass
                         else:
-                            out.write("Amino acid composition:")
+                            out.write("Amino acid composition:\n")
                             for key in keys:
-                                out.write("\t{} = {:.2%}".format(key, myAAcomposition[key] / PP.aaCount()),
+                                out.write("\t{} = {:.2%}\n".format(key, myAAcomposition[key] / PP.aaCount()),
                                     )
-                        out.write("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n",
-                            )
+                        out.write("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n\n")
                 else:  # plus strand
                     NP = NucParams(True)
                     NP.addSequence(listy[5])
                     PP = ProteinParam(NP.aaAsString(), self.cytosine)
                     with open(self.outputfile, 'a') as out:
-                        out.write("{:+d} {:>5d}...{:>5d} {:>5d}".format(listy[0], listy[1], listy[2], listy[3]))
-                        out.write("┏━━━━━━━━━━━━━━━━┓")
-                        out.write("┃  ORF in frame  ┃")
-                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        out.write("{:+d} {:>5d}...{:>5d} {:>5d}\n".format(listy[0], listy[1], listy[2], listy[3]))
+                        out.write("┏━━━━━━━━━━━━━━━━┓\n")
+                        out.write("┃  ORF in frame  ┃\n")
+                        out.write("┡━━━━━━━━━━━━━━━━┩\n")
                         out.write(listy[5])
-                        out.write("┏━━━━━━━━━━━━━━━━┓")
-                        out.write("┃  Resulting AA  ┃")
-                        out.write("┡━━━━━━━━━━━━━━━━┩")
+                        out.write("\n")
+                        out.write("┏━━━━━━━━━━━━━━━━┓\n")
+                        out.write("┃  Resulting AA  ┃\n")
+                        out.write("┡━━━━━━━━━━━━━━━━┩\n")
                         if (NP.aaAsString() != '-'):
-                            out.write("{}".format(NP.aaAsString()))
+                            out.write("{}\n".format(NP.aaAsString()))
                         else:
-                            out.write("None -- just a stop codon")
-                        out.write("┏━━━━━━━━━━━━━━━━━━━━━━━┓")
-                        out.write("┃  Protein properties   ┃")
-                        out.write("┡━━━━━━━━━━━━━━━━━━━━━━━┩")
+                            out.write("None -- just a stop codon\n")
+                        out.write("┏━━━━━━━━━━━━━━━━━━━━━━━┓\n")
+                        out.write("┃  Protein properties   ┃\n")
+                        out.write("┡━━━━━━━━━━━━━━━━━━━━━━━┩\n")
                         if (NP.aaAsString() != '-'):
-                            out.write("pI value: %s" % PP.pI())
-                            out.write("Molar Extinction: %s" % PP.molarExtinction())
-                            out.write("Mass Extinction: %s" % PP.massExtinction())
-                            out.write("Molecular Weight: %s" % PP.molecularWeight())
+                            out.write("pI value: %s\n" % PP.pI())
+                            out.write("Molar Extinction: %s\n" % PP.molarExtinction())
+                            out.write("Mass Extinction: %s\n" % PP.massExtinction())
+                            out.write("Molecular Weight: %s\n" % PP.molecularWeight())
                         else:
-                            out.write("None -- just a stop codon")
+                            out.write("None -- just a stop codon\n")
                         myAAcomposition = PP.aaComposition()
                         keys = list(myAAcomposition.keys())
                         keys.sort()
@@ -358,10 +359,10 @@ class OrfFinder:
                         elif PP.aaCount() == 1:
                             pass
                         else:
-                            out.write("Amino acid composition:")
+                            out.write("Amino acid composition:\n")
                             for key in keys:
-                                out.write("\t{} = {:.2%}".format(key, myAAcomposition[key]/PP.aaCount()))
-                        out.write("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n")
+                                out.write("\t{} = {:.2%}\n".format(key, myAAcomposition[key]/PP.aaCount()))
+                        out.write("\n^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^v^\n\n")
                     
 
     def writeResults(self, results):
