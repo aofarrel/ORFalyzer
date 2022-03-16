@@ -1,7 +1,7 @@
 version: 2.1
 
-# orbs:
-#   python: cimg/python:3.7.12
+orbs:
+   python: circleci/python:3.7.12
 
 jobs:
   build-docker-image: 
