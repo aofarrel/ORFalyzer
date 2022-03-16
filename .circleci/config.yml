@@ -1,8 +1,5 @@
 version: 2.1
 
-docker:
-  - image: circleci/python:3.8.1
-
 jobs:
   build-docker-image: 
     machine: true
@@ -13,9 +10,17 @@ jobs:
           command: | 
             docker build .
             #docker push https://quay.io/repository/aofarrel/orfalyzer:circleci
-  
+  python-tests:
+    machine:
+      image: circleci/python:3.8.1
+    steps:
+      - checkout
+      - run:
+          command: python3 -m pytest -v tests.py
+          name: Run python related tests
 
 workflows: 
   main: 
     jobs: 
+      - python-tests
       - build-docker-image
